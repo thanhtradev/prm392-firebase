@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView instructionTextView = findViewById(R.id.instruction_text_view);
         TextView tokenTextView = findViewById(R.id.token_text_view);
+        EditText editText = findViewById(R.id.token_edit_text);
+
         instructionTextView.setText("Please put the app into the background by pressing the home button.");
+        tokenTextView.setText("Your token: ");
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         // Log and toast
 //                        String msg = getString(R.string.msg_token_fmt, token);
                         System.out.println(token);
-                        tokenTextView.setText("Your token: " + token);
+                        editText.setText(token);
                         Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
                     }
                 });
